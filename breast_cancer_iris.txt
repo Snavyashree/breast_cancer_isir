@@ -1,0 +1,110 @@
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_boston
+from sklearn.datasets import load_breast_cancer
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import tree
+from sklearn.svm import SVC
+
+bostondata=load_boston()
+bostondata
+
+df=pd.DataFrame(bostondata.data,columns=bostondata.feature_names)
+df
+
+df['PRICE']=bostondata.target
+df
+
+x=df.drop('PRICE',axis=1)
+y=df['PRICE']
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=5)
+
+lm=LinearRegression()
+lm
+
+lm.fit(x_train,y_train)
+
+accuracy=lm.score(x_test,y_test)
+accuracy
+
+model=RandomForestRegressor(n_estimators=100)
+model.fit(x_train,y_train)
+
+accuracy=model.score(x_test,y_test)
+accuracy
+
+cancer=load_breast_cancer()
+x=cancer["data"]
+y=cancer["target"]
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3)
+
+model=RandomForestClassifier(n_estimators=100)
+
+model.fit(x_train,y_train)
+
+predictions = model.predict(X_test)
+
+accuracy=model.score(x_test,y_test)
+print("Accuracy: %.2f" % accuracy)
+
+iris = load_iris()
+x = iris["data"]
+y = iris["target"] 
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3)
+
+model = SVC()
+
+model.fit(x_train,y_train)
+
+predictions = model.predict(x_test)
+
+accuracy = model.score(x_test,y_test)
+accuracy
+
+iris = load_iris()
+x = iris["data"]
+y = iris["target"] 
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3)
+
+model = LinearRegression()
+
+model.fit(x_train,y_train)
+
+accuracy = model.score(x_test,y_test)
+accuracy
+
+pdf=pd.read_csv("C:/Users/admin/Downloads/archive (11)/odb.csv")
+pdf
+
+p1df=pdf.drop(columns ='Span',axis=1)
+
+p1df.info()
+
+p1df=pdf.drop(columns ='HS',axis=1)
+
+p1df.info()
+
+p1df=pdf.drop(columns ='6s',axis=1)
+
+p1df.info()
+
+p1df=pdf.drop(columns ='4s',axis=1)
+
+p1df.info()
+
+p1df.groupby('Player').mean()
+
+X=p1df.drop(columns='Player',axis=1)
+Y=p1df['Player']
+
